@@ -1,0 +1,3 @@
+{
+  locations: [{id: 1, name: "Mediterranean Avenue", cost: 60, rent: [{}]}]
+}
