@@ -6,7 +6,7 @@ export class ActionsService {
   constructor() { }
 
   getDiceRoll(){
-    return this.getRandomInt(1,3)
+    return this.getRandomInt(1,7)
 
   }
 

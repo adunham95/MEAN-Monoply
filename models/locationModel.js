@@ -14,7 +14,6 @@ const ActionsSchema = mongoose.Schema({
 
 // Location Schema
 const LocationSchema = mongoose.Schema({
-    _id: Number,
     type: String,
     name: String,
     group: String,
@@ -47,4 +46,12 @@ module.exports.getAllLocations= function (callback) {
 module.exports.deleteAll = function (callback) {
     let query = Location.find();
     Location.deleteMany(query.$all, callback)
+};
+
+
+module.exports.purchaseUpdate = function (id, user, callback) {
+    console.log("Inside modeule.purchaseUpdate");
+    console.log(id);
+
+    Location.where({ _id: id }).update({owned: true, ownedBy: user}, callback);
 };

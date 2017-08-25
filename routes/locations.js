@@ -8,7 +8,6 @@ router.post('/savelocation', (req, res, next) => {
 
     let locations =  [
         {
-            _id: 1,
             type: 'action',
             name: "Go",
             group: 'None',
@@ -20,30 +19,12 @@ router.post('/savelocation', (req, res, next) => {
             }
         },
         {
-            _id: 2,
             type: 'property',
             name: "Mediterranean Avenue",
             group: 'Purple',
-            color: "#EE82EE",
+            color: "#560D3B",
             cost: 60,
             rent: [ 2, 10, 30, 90, 160, 250 ],
-            mortgage: 30,
-            accessories: [
-                {houses: 50}
-            ],
-            owned: false,
-            ownedBy: null,
-            locationOnBoard: 1,
-            buildings: 0
-        },
-        {
-            _id: 3,
-            type: 'property',
-            name: "Baltic Avenue",
-            group: 'Purple',
-            color: "#EE82EE",
-            cost: 60,
-            rent: [ 4, 20, 60, 180, 320, 450 ],
             mortgage: 30,
             accessories: [
                 {houses: 50}
@@ -54,7 +35,22 @@ router.post('/savelocation', (req, res, next) => {
             buildings: 0
         },
         {
-            _id: 4,
+            type: 'property',
+            name: "Baltic Avenue",
+            group: 'Purple',
+            color: "#560D3B",
+            cost: 60,
+            rent: [ 4, 20, 60, 180, 320, 450 ],
+            mortgage: 30,
+            accessories: [
+                {houses: 50}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 4,
+            buildings: 0
+        },
+        {
             type: 'property',
             name: "Oriental Avenue",
             group: 'Light Blue',
@@ -67,11 +63,10 @@ router.post('/savelocation', (req, res, next) => {
             ],
             owned: false,
             ownedBy: null,
-            locationOnBoard: 3,
+            locationOnBoard: 7,
             buildings: 0
         },
         {
-            _id: 5,
             type: 'property',
             name: "Vermont Avenue",
             group: 'Light Blue',
@@ -84,7 +79,7 @@ router.post('/savelocation', (req, res, next) => {
             ],
             owned: false,
             ownedBy: null,
-            locationOnBoard: 4,
+            locationOnBoard: 9,
             buildings: 0
         },
         {
@@ -101,11 +96,10 @@ router.post('/savelocation', (req, res, next) => {
             ],
             owned: false,
             ownedBy: null,
-            locationOnBoard: 5,
+            locationOnBoard: 10,
             buildings: 0
         },
         {
-            _id: 7,
             type: 'property',
             name: "St. Charles Place",
             group: 'Pink',
@@ -116,33 +110,267 @@ router.post('/savelocation', (req, res, next) => {
             accessories: [
                 {houses: 100}
             ],
-            owned: true,
-            ownedBy: "steve",
-            locationOnBoard: 6,
-            buildings: 2
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 12,
+            buildings: 0
         },
         {
-            _id: 8,
-            type: 'action',
-            name: "Go To Jail",
-            group: 'None',
-            color: "#FFFFFF",
-            actions: {
-                type: 'goToJail',
-                message: "Go to Jail"
-            }
+            type: 'property',
+            name: "States Ave",
+            group: 'Pink',
+            color: "#FF69B4",
+            cost: 140,
+            rent: [ 10,50,150,450,625,750 ],
+            mortgage: 70,
+            accessories: [
+                {houses: 100}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 14,
+            buildings: 0
         },
         {
-            _id: 9,
-            type: 'action',
-            name: "Jail Cell",
-            group: 'None',
-            color: "#3A3A3A",
-            actions: {
-                type: 'jail',
-                message: ""
-            }
+            type: 'property',
+            name: "Virgina Ave",
+            group: 'Pink',
+            color: "#FF69B4",
+            cost: 160,
+            rent: [ 12,60,180,500,700,900 ],
+            mortgage: 80,
+            accessories: [
+                {houses: 100}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 15,
+            buildings: 0
         },
+        {
+            type: 'property',
+            name: "St James Place",
+            group: 'Orange',
+            color: "#FF9538",
+            cost: 180,
+            rent: [ 14, 70, 200, 550, 750, 950 ],
+            mortgage: 80,
+            accessories: [
+                {houses: 100}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 17,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Tennessee Ave",
+            group: 'Orange',
+            color: "#FF9538",
+            cost: 180,
+            rent: [ 14, 70, 200, 550, 750, 950 ],
+            mortgage: 80,
+            accessories: [
+                {houses: 100}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 19,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "New York Ave",
+            group: 'Orange',
+            color: "#FF9538",
+            cost: 200,
+            rent: [ 16, 80, 220, 600, 800 ],
+            mortgage: 100,
+            accessories: [
+                {houses: 100}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 20,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Kentucky Ave",
+            group: 'Red',
+            color: "#FF3B38",
+            cost: 220,
+            rent: [ 18, 90, 250, 700, 875, 1050 ],
+            mortgage: 100,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 22,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Indiana Ave",
+            group: 'Red',
+            color: "#FF3B38",
+            cost: 220,
+            rent: [ 18, 90, 250, 700, 875, 1050 ],
+            mortgage: 100,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 24,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Illinois Ave",
+            group: 'Red',
+            color: "#FF3B38",
+            cost: 240,
+            rent: [ 20, 100, 300, 750, 925, 1100],
+            mortgage: 120,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 25,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Atlantic Ave",
+            group: 'Yellow',
+            color: "#F7FF5E",
+            cost: 260,
+            rent: [ 22, 110, 330, 800, 975, 1150 ],
+            mortgage: 120,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 27,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Ventnor Ave",
+            group: 'Yellow',
+            color: "#F7FF5E",
+            cost: 260,
+            rent: [ 22, 110, 330, 800, 975, 1150 ],
+            mortgage: 120,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 28,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Marvin Gardens",
+            group: 'Yellow',
+            color: "#F7FF5E",
+            cost: 280,
+            rent: [ 24, 120, 350, 850, 1025, 1200 ],
+            mortgage: 125,
+            accessories: [
+                {houses: 150}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 30,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Pacific Ave",
+            group: 'Green',
+            color: "#0AA604",
+            cost: 300,
+            rent: [ 26, 130, 390, 900, 1100, 1275 ],
+            mortgage: 150,
+            accessories: [
+                {houses: 200}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 32,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "North Carolina Ave",
+            group: 'Green',
+            color: "#0AA604",
+            cost: 300,
+            rent: [ 26, 130, 390, 900, 1100, 1275 ],
+            mortgage: 150,
+            accessories: [
+                {houses: 200}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 33,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Pennsylvania Ave",
+            group: 'Green',
+            color: "#0AA604",
+            cost: 320,
+            rent: [ 28, 150, 450, 1000, 1200, 1400],
+            mortgage: 160,
+            accessories: [
+                {houses: 200}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 35,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Park Place",
+            group: 'Dark Blue',
+            color: "#3B38FF",
+            cost: 350,
+            rent: [ 35, 175, 500, 1100, 1300, 1500],
+            mortgage: 200,
+            accessories: [
+                {houses: 200}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 38,
+            buildings: 0
+        },
+        {
+            type: 'property',
+            name: "Boardwalk",
+            group: 'Dark Blue',
+            color: "#3B38FF",
+            cost: 350,
+            rent: [ 50, 200, 600, 1400, 1700, 2000],
+            mortgage: 200,
+            accessories: [
+                {houses: 200}
+            ],
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 40,
+            buildings: 0
+        }
     ];
 
 
@@ -156,6 +384,7 @@ router.post('/savelocation', (req, res, next) => {
     })
 });
 
+//Get All Locations
 router.get('/getlocations', (req, res, next) => {
 
     Location.getAllLocations((err, location) => {
@@ -172,8 +401,10 @@ router.get('/getlocations', (req, res, next) => {
     })
 });
 
-router.get('/getsinglelocation', (req, res, next) => {
+//Get Single Location
+router.post('/getsinglelocation', (req, res, next) => {
 
+    let id = req.body._id;
 
     Location.getLocationById(id, (err, location) => {
         if (err) {
@@ -197,7 +428,26 @@ router.post('/clear', (req, res, next) =>{
             res.json({success: true, msg: "Cleared Locations"})
         }
     });
-})
+});
+
+
+router.post('/update/purchase', (req, res, next) =>{
+
+    let locationID = req.body.locationID;
+    let user = req.body.user;
+
+    Location.purchaseUpdate(locationID, user, (err, location) =>{
+        if (err) {
+            res.json({success: false, msg: "Error Updating Location"});
+        }
+        if (location) {
+            res.json({location: location})
+        }
+        else {
+            res.json({success: false, msg: "Failed to update location"});
+        }
+    });
+});
 
 
 

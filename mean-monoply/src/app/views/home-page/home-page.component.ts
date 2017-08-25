@@ -32,14 +32,7 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locationService.getAllLocations().subscribe(locations =>{
-      console.log(locations);
-      this.locations = locations.locations
-    }, err =>{
-      console.log(err);
-      return false
-    });
-
+    this.reloadLocations();
     this.user = {
       _id: 1,
       name: 'Adrian',
@@ -57,7 +50,7 @@ export class HomePageComponent implements OnInit {
     this.diceNumberOne = this.actionService.getDiceRoll();
     this.diceNumberTwo = this.actionService.getDiceRoll();
     this.diceDoubles = this.doublesCheck(this.diceNumberOne, this.diceNumberTwo);
-    this.diceTotal = this.diceNumberOne;
+    this.diceTotal = this.diceNumberOne + this.diceNumberTwo;
 
     // Sets the new location  number in the array.
     const newLocation = this.user.location + this.diceTotal;
@@ -120,15 +113,40 @@ export class HomePageComponent implements OnInit {
   }
 
   purchaseProperty(userID, propertyID, propertyIndex){
-    this.locations[propertyIndex].owned = true;
-    this.locations[propertyIndex].ownedBy = "Adrian";
+    console.log(userID);
+    console.log(propertyID);
     //Takes the money out of the users account
     this.user.money = this.user.money - this.locations[propertyIndex].cost;
+
+    this.locationService.purchaseUpdate(propertyID, userID.toString()).subscribe(data => {
+      if(data.location.ok === 1){
+        console.log("Successfully saved data");
+        this.reloadLocations();
+      }
+      else {
+        console.log("Err saved data");
+        console.log(data);
+      }
+    });
+
     this.user.ownedProperties.push({property: this.locations[propertyIndex]});
     this.purchaseable = false;
 
-    console.log(this.user)
+  }
 
+  resetGame() {
+    console.log("Game reset")
+  }
+
+
+  reloadLocations(){
+    this.locationService.getAllLocations().subscribe(locations =>{
+      console.log(locations);
+      this.locations = locations.locations
+    }, err =>{
+      console.log(err);
+      return false
+    });
   }
 
 }
