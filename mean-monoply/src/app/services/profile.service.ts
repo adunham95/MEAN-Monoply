@@ -11,17 +11,22 @@ export class ProfileService {
     private http: Http,
   ) { }
 
-  createProfile(user) {
+  createProfile(name) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/users/newuser', user, {headers: headers}).map(res => res.json())
+    return this.http.post('http://localhost:8080/users/newuser', {name: name}, {headers: headers}).map(res => res.json())
   }
 
   getUser(userID){
-    let headers = new Headers()
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/users/profile',{headers: headers}).map(res => res.json())
+    return this.http.post('http://localhost:8080/users/profile',{userID: userID},{headers: headers}).map(res => res.json())
   }
 
+  purchaseUpdate(money, userID, locationName){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/users/update/purchase', {money: money, _id: userID, locationName: locationName}, {headers: headers}).map(res => res.json())
+  }
 }
 

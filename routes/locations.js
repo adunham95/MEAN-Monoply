@@ -12,6 +12,7 @@ router.post('/savelocation', (req, res, next) => {
             name: "Go",
             group: 'None',
             color: "#FFFFFF",
+            locationOnBoard: 1,
             actions: {
                 type: 'money',
                 money: 200,

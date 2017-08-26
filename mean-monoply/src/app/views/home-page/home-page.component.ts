@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionsService} from "../../services/actions.service"
-import { LocationsService} from "../../services/locations.service"
-import {flatMap} from "tslint/lib/utils";
-import {ProfileService} from "../../services/profile.service";
+import { LocationsService} from "../../services/locations.service";
+import { ProfileService} from "../../services/profile.service"
+import {init} from "protractor/built/launcher";
 
 @Component({
   selector: 'app-home-page',
@@ -20,10 +20,10 @@ export class HomePageComponent implements OnInit {
 
   locations: any;
   purchaseable: boolean;
-  // username: String;
-  // name: String;
+  userID: string;
 
   user: any;
+  name: any;
 
   constructor(
     private actionService: ActionsService,
@@ -33,14 +33,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.reloadLocations();
-    this.user = {
-      _id: 1,
-      name: 'Adrian',
-      username: 'adunham',
-      money: 500,
-      ownedProperties: [],
-      location: 0
-  };
+    this.getUser();
   }
 
   movePlayer(){
@@ -112,15 +105,28 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  purchaseProperty(userID, propertyID, propertyIndex){
-    console.log(userID);
-    console.log(propertyID);
-    //Takes the money out of the users account
-    this.user.money = this.user.money - this.locations[propertyIndex].cost;
+  purchaseProperty(user, property, propertyIndex){
+    console.log(user);
+    console.log(property);
 
-    this.locationService.purchaseUpdate(propertyID, userID.toString()).subscribe(data => {
+    let currentUser = user;
+    let currentLoc = property;
+    //Takes the money out of the users account
+
+    this.locationService.purchaseUpdate(property._id, user.name.toString()).subscribe(data => {
       if(data.location.ok === 1){
+        let initialArray = currentUser.ownedProperties
+        let updatedArray = initialArray.push(currentLoc.name);
         console.log("Successfully saved data");
+        console.log(initialArray);
+        console.log('Starting Sync');
+        this.profileService.purchaseUpdate((this.user.money - currentLoc.cost), currentUser._id, initialArray).subscribe(data =>{
+          console.log(data);
+          this.getUser()
+        }, err =>{
+          console.log(err);
+          return false
+        });
         this.reloadLocations();
       }
       else {
@@ -129,7 +135,8 @@ export class HomePageComponent implements OnInit {
       }
     });
 
-    this.user.ownedProperties.push({property: this.locations[propertyIndex]});
+
+    // this.user.ownedProperties.push({property: this.locations[propertyIndex]});
     this.purchaseable = false;
 
   }
@@ -143,6 +150,28 @@ export class HomePageComponent implements OnInit {
     this.locationService.getAllLocations().subscribe(locations =>{
       console.log(locations);
       this.locations = locations.locations
+    }, err =>{
+      console.log(err);
+      return false
+    });
+  }
+
+  getUser(){
+    this.userID = localStorage.getItem('userId');
+    this.profileService.getUser(this.userID).subscribe(user =>{
+      console.log(user);
+      this.user = user.user
+    }, err =>{
+      console.log(err);
+      return false
+    });
+  }
+
+  newUser(){
+    this.profileService.createProfile(this.name).subscribe(data =>{
+      console.log(data);
+      localStorage.setItem('userId', data.user._id);
+      this.getUser()
     }, err =>{
       console.log(err);
       return false

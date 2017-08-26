@@ -22,7 +22,6 @@ export class LocationsService {
   }
 
   purchaseUpdate(locationID, user){
-    console.log(typeof locationID);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/locations/update/purchase', {locationID: locationID, user: user}, {headers: headers}).map(res => res.json())

@@ -50,8 +50,5 @@ module.exports.deleteAll = function (callback) {
 
 
 module.exports.purchaseUpdate = function (id, user, callback) {
-    console.log("Inside modeule.purchaseUpdate");
-    console.log(id);
-
     Location.where({ _id: id }).update({owned: true, ownedBy: user}, callback);
 };
