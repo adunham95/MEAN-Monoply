@@ -15,29 +15,29 @@
 </form>
 
 
-<div *ngIf="users">
-  <div><span *ngFor="let user of users">{{user.name}}</span></div>
-  <!--<h2>Current Player: {{user.name}}</h2>-->
-  <!--<div *ngIf="user.ownedProperties">-->
-    <!--<h3>Owned Properties</h3>-->
-    <!--<ul>-->
-      <!--<li *ngFor="let owned of user.ownedProperties">-->
-        <!--{{owned}}-->
-        <!--<span></span>-->
-        <!--<button (click)="addHouse()">Add House</button>-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
-  <!--<h3>Money: {{user.money}}</h3>-->
-  <!--<h3 *ngIf="locations">Current Location: {{locations[user.location].name}}</h3>-->
-  <!--<div *ngIf="locations">-->
-    <!--<div *ngIf=purchaseable>-->
-      <!--<h2>Would you like to purchase {{locations[user.location].name}}?</h2>-->
-      <!--<button (click)="purchaseProperty(user, locations[user.location], user.location)">Yes</button>-->
-      <!--<button (click)="purchaseable = false">No</button>-->
-    <!--</div>-->
-  <!--</div>-->
-
+<div *ngIf="users" >
+  <div *ngFor="let user of users">
+    <h2>Current Player: {{user.name}}</h2>
+    <div *ngIf="user.ownedProperties">
+      <h3>Owned Properties</h3>
+      <ul>
+        <li *ngFor="let owned of user.ownedProperties">
+          {{owned}}
+          <span></span>
+          <button (click)="addHouse()">Add House</button>
+        </li>
+      </ul>
+    </div>
+    <h3>Money: {{user.money}}</h3>
+    <h3 *ngIf="locations">Current Location: {{locations[user.location].name}}</h3>
+    <div *ngIf="locations">
+      <div *ngIf=purchaseable>
+        <h2>Would you like to purchase {{locations[user.location].name}}?</h2>
+        <button (click)="purchaseProperty(user, locations[user.location], user.location)">Yes</button>
+        <button (click)="purchaseable = false">No</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <p *ngIf="message">{{message}}</p>
