@@ -15,6 +15,9 @@ const UserSchema = mongoose.Schema({
     },
     location: {
         type: Number
+    },
+    active: {
+        type: Boolean
     }
 });
 
@@ -44,4 +47,8 @@ module.exports.purchaseUpdate = function (id, money, locName, callback) {
 module.exports.deleteAll = function (callback) {
     let query = User.find();
     User.deleteMany(query.$all, callback)
+};
+
+module.exports.setActivePlayer = function (userID, userStatus, callback) {
+    User.where({_id: userID}).update({active: userStatus}, callback);
 };

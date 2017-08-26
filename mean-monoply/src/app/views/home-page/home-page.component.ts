@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
   purchaseable: boolean;
   userID: string;
 
-  user: any;
+  users: any;
   name: any;
 
   constructor(
@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
     this.getUser();
   }
 
-  movePlayer(){
+  movePlayer(userIndex){
     this.purchaseable = false;
     this.message = null;
 
@@ -45,25 +45,27 @@ export class HomePageComponent implements OnInit {
     this.diceDoubles = this.doublesCheck(this.diceNumberOne, this.diceNumberTwo);
     this.diceTotal = this.diceNumberOne + this.diceNumberTwo;
 
+    let currentUser = this.users;
+
     // Sets the new location  number in the array.
-    const newLocation = this.user.location + this.diceTotal;
+    const newLocation = currentUser.location + this.diceTotal;
     if(newLocation >= this.locations.length){
       //If the number is larger then the array it finds the difference and moves the user to that location
-      this.user.location = newLocation - this.locations.length
+      currentUser.location = newLocation - this.locations.length
     }
     else {
-      this.user.location = newLocation
+      currentUser.location = newLocation
     }
 
     //Grabs the users current location information
-    const userLocation = this.locations[this.user.location];
+    const userLocation = this.locations[currentUser.location];
 
     //Checks to see if the location is a property
     if(userLocation.type === 'property'){
       //Checks to see if the property is owned. If the player does not own the property then a button pops up where the user can purchase it
       if(userLocation.owned === false){
         //Checks to see if the user has the money to purchase the property
-        if(this.user.money > this.locations[this.user.location].cost){
+        if(currentUser.money > this.locations[currentUser.location].cost){
           this.purchaseable = true;
         }
       }
@@ -71,28 +73,32 @@ export class HomePageComponent implements OnInit {
       //If the property is owned
       if(userLocation.owned === true){
         //Checks to see if the property is owned but the current player, if not it takes rent from the player
-        if (userLocation.ownedBy !== this.user.name){
+        if (userLocation.ownedBy !== currentUser.name){
           const rent = userLocation.rent[userLocation.buildings];
           this.message = "You have to pay rent of " + rent;
-          this.user.money = this.user.money - rent;
+          currentUser.money = currentUser.money - rent;
         }
       }
     }
     if(userLocation.type === 'action'){
       if(userLocation.actions[0].type === 'money'){
-        this.user.money = this.user.money + userLocation.actions[0].money;
+        currentUser.money = currentUser.money + userLocation.actions[0].money;
         this.message = userLocation.actions[0].message
       }
       if(userLocation.actions[0].type === 'goToJail'){
         this.message = userLocation.actions[0].message;
-        this.user.location = 8
+        currentUser.location = 8
       }
     }
 
-    if(this.user.money < 0){
+    if(currentUser.money < 0){
       this.message = "BANKRUPT"
     }
 
+    this.profileService.setPlayerStatus(currentUser._id, true).subscribe(data =>{
+      console.log(data)
+    });
+    this.getUser();
   }
 
   doublesCheck(diceOne, diceTwo){
@@ -106,27 +112,25 @@ export class HomePageComponent implements OnInit {
   }
 
   purchaseProperty(user, property, propertyIndex){
-    console.log(user);
-    console.log(property);
-
     let currentUser = user;
     let currentLoc = property;
-    //Takes the money out of the users account
 
+    //Calls the location service to update the database
     this.locationService.purchaseUpdate(property._id, user.name.toString()).subscribe(data => {
       if(data.location.ok === 1){
-        let initialArray = currentUser.ownedProperties
+
+
+        let initialArray = currentUser.ownedProperties;
         let updatedArray = initialArray.push(currentLoc.name);
-        console.log("Successfully saved data");
-        console.log(initialArray);
-        console.log('Starting Sync');
-        this.profileService.purchaseUpdate((this.user.money - currentLoc.cost), currentUser._id, initialArray).subscribe(data =>{
-          console.log(data);
+        //Calls the profile service to update with your purchase
+        this.profileService.purchaseUpdate((currentUser.money - currentLoc.cost), currentUser._id, initialArray).subscribe(data =>{
+          //Updates the user with the server info
           this.getUser()
         }, err =>{
           console.log(err);
           return false
         });
+        //Updates the
         this.reloadLocations();
       }
       else {
@@ -134,10 +138,9 @@ export class HomePageComponent implements OnInit {
         console.log(data);
       }
     });
-
-
-    // this.user.ownedProperties.push({property: this.locations[propertyIndex]});
+    console.log("Successfully saved data");
     this.purchaseable = false;
+
 
   }
 
@@ -157,10 +160,9 @@ export class HomePageComponent implements OnInit {
   }
 
   getUser(){
-    this.userID = localStorage.getItem('userId');
-    this.profileService.getUser(this.userID).subscribe(user =>{
+    this.profileService.getAll().subscribe(user =>{
       console.log(user);
-      this.user = user.user
+      this.users = user.user
     }, err =>{
       console.log(err);
       return false

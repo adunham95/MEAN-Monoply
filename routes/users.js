@@ -31,6 +31,9 @@ router.get('/allprofiles', function (req, res, next) {
         if (err) {
             res.json({success: false, msg: "Error retrieving user " + err})
         }
+        if(user){
+            res.json({success: true, user: user})
+        }
         else {
             res.json({success: false, msg: 'Failed to retrieve user'})
         }
@@ -62,6 +65,23 @@ router.post('/update/purchase', function (req, res, next) {
     let locName = req.body.locationName;
 
     User.purchaseUpdate(userID, money, locName, (err, user) =>{
+        if (err) {
+            res.json({success: false, msg: "Error Updating Player " + err});
+        }
+        if (user) {
+            res.json({success: true, msg: 'Updated Player', user: user});
+        }
+        else {
+            res.json({success: false, msg: "Failed to update location"});
+        }
+    });
+});
+
+router.post('/update/setActive', function (req, res, next) {
+    let status = req.body.status;
+    let userID = req.body.userID;
+
+    User.setActivePlayer(userID, status, (err, user) =>{
         if (err) {
             res.json({success: false, msg: "Error Updating Player " + err});
         }

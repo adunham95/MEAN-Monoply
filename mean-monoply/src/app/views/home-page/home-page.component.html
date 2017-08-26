@@ -1,11 +1,12 @@
 <button (click)="movePlayer()">Roll Dice</button>
-<button (click)="resetGame()">Reset Game</button>
+<!--<button (click)="resetGame()">Reset Game</button>-->
+<!--<button (click)="addPlayer()">Add Player</button>-->
 <h1>Dice One: {{diceNumberOne}}</h1>
 <h1>Dice Two: {{diceNumberTwo}}</h1>
 <h1>Dice Total: {{diceTotal}}</h1>
 <h1 *ngIf="diceDoubles">DOUBLES!</h1>
 
-<form (submit)="newUser()" *ngIf="!user">
+<form (submit)="newUser()">
   <div class="form-group">
     <label>Name</label>
     <input type="text" [(ngModel)]="name" name="name" class="form-control">
@@ -14,27 +15,28 @@
 </form>
 
 
-<div *ngIf="user">
-  <h2>Current Player: {{user.name}}</h2>
-  <div *ngIf="user.ownedProperties">
-    <h3>Owned Properties</h3>
-    <ul>
-      <li *ngFor="let owned of user.ownedProperties">
-        {{owned}}
-        <span></span>
-        <button (click)="addHouse()">Add House</button>
-      </li>
-    </ul>
-  </div>
-  <h3>Money: {{user.money}}</h3>
-  <h3 *ngIf="locations">Current Location: {{locations[user.location].name}}</h3>
-  <div *ngIf="locations">
-    <div *ngIf=purchaseable>
-      <h2>Would you like to purchase {{locations[user.location].name}}?</h2>
-      <button (click)="purchaseProperty(user, locations[user.location], user.location)">Yes</button>
-      <button (click)="purchaseable = false">No</button>
-    </div>
-  </div>
+<div *ngIf="users">
+  <div><span *ngFor="let user of users">{{user.name}}</span></div>
+  <!--<h2>Current Player: {{user.name}}</h2>-->
+  <!--<div *ngIf="user.ownedProperties">-->
+    <!--<h3>Owned Properties</h3>-->
+    <!--<ul>-->
+      <!--<li *ngFor="let owned of user.ownedProperties">-->
+        <!--{{owned}}-->
+        <!--<span></span>-->
+        <!--<button (click)="addHouse()">Add House</button>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+  <!--<h3>Money: {{user.money}}</h3>-->
+  <!--<h3 *ngIf="locations">Current Location: {{locations[user.location].name}}</h3>-->
+  <!--<div *ngIf="locations">-->
+    <!--<div *ngIf=purchaseable>-->
+      <!--<h2>Would you like to purchase {{locations[user.location].name}}?</h2>-->
+      <!--<button (click)="purchaseProperty(user, locations[user.location], user.location)">Yes</button>-->
+      <!--<button (click)="purchaseable = false">No</button>-->
+    <!--</div>-->
+  <!--</div>-->
 
 </div>
 
