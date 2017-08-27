@@ -189,6 +189,25 @@ export class HomePageComponent implements OnInit {
   }
 
   endTurn(){
-    this.rolled = false
+    this.rolled = false;
+    this.purchaseable = false;
+    let nextUserID =  this.users.indexOf(this.activeUser);
+    nextUserID = nextUserID + 1;
+    if(nextUserID >= this.users.length){
+      //If the number is larger then the array it finds the difference and moves the user to that location
+      nextUserID = 0
+    }
+    let nextUser = this.users[nextUserID];
+    console.log(nextUser);
+
+    //Changes Current User to status to false
+    this.profileService.setPlayerStatus(this.activeUser._id, false, this.activeUser.location).subscribe(data =>{
+      console.log(data)
+    });
+    //Changes Next user in the array to active true
+    this.profileService.setPlayerStatus(nextUser._id, true, nextUser.location).subscribe(data =>{
+      console.log(data)
+    });
+    this.getUser();
   }
 }

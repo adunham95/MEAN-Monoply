@@ -17,7 +17,7 @@
 
 <div *ngIf="users" >
   <div *ngFor="let user of users">
-    <p>{{user.name}}  {{user.active}}</p>
+    <p>{{user.name}}  {{user.active}} at: {{locations[user.location].name}}</p>
   </div>
 
   <div>
