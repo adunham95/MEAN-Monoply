@@ -55,7 +55,10 @@ export class HomePageComponent implements OnInit {
 
     if(newLocation >= this.locations.length){
       //If the number is larger then the array it finds the difference and moves the user to that location
-      currentUser.location = newLocation - this.locations.length
+      currentUser.location = newLocation - this.locations.length;
+
+      //Adds $200 when you pass go #TODO add the ability to save the money
+      // currentUser.money = currentUser.money + 200;
     }
     else {
       currentUser.location = newLocation
