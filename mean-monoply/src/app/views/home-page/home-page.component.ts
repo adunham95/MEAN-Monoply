@@ -15,6 +15,7 @@ export class HomePageComponent implements OnInit {
   diceNumberTwo: number;
   diceDoubles: boolean;
   diceTotal: number;
+  rolled: boolean;
 
   message: string;
 
@@ -101,6 +102,8 @@ export class HomePageComponent implements OnInit {
     this.profileService.setPlayerStatus(currentUser._id, true, currentUser.location).subscribe(data =>{
       console.log(data)
     });
+
+    this.rolled = true;
   }
 
   doublesCheck(diceOne, diceTwo){
@@ -185,7 +188,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  nextTurn(){
-
+  endTurn(){
+    this.rolled = false
   }
 }

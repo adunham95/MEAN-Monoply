@@ -1,4 +1,4 @@
-<button (click)="movePlayer()">Roll Dice</button>
+<button (click)="movePlayer()" *ngIf="!rolled">Roll Dice</button>
 <!--<button (click)="resetGame()">Reset Game</button>-->
 <!--<button (click)="addPlayer()">Add Player</button>-->
 <h1>Dice One: {{diceNumberOne}}</h1>
@@ -38,9 +38,9 @@
       <div *ngIf=purchaseable>
         <h2>Would you like to purchase {{locations[activeUser.location].name}}?</h2>
         <button (click)="purchaseProperty(activeUser, locations[activeUser.location], activeUser.location)">Yes</button>
-        <button (click)="purchaseable = false">No</button>
       </div>
     </div>
+    <button (click)="endTurn()" *ngIf="rolled">End Turn</button>
   </div>
 </div>
 
