@@ -8,7 +8,8 @@ router.post('/newuser', function(req, res, next) {
         name: req.body.name,
         money: 1000000,
         ownedProperties: [],
-        location: 0
+        location: 0,
+        active: false
 
     });
 
