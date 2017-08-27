@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './views/home-page/home-page.component';
 import { ProfilePageComponent } from './views/profile-page/profile-page.component';
+import { PropertySpaceComponent } from './components/property-space/property-space.component';
 
 // Service Imports
 import { ActionsService} from "./services/actions.service";
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    PropertySpaceComponent
   ],
   imports: [
     BrowserModule,

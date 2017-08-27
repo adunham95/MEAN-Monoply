@@ -46,6 +46,14 @@
 
 <p *ngIf="message">{{message}}</p>
 
-<ul>
-  <li *ngFor="let property of locations">({{property.locationOnBoard}}){{property.name}} <span *ngIf="property.cost">Cost: ${{property.cost}}</span> <span *ngIf="property.ownedBy">Current Rent: ${{property.rent[property.buildings]}} Owned By {{property.ownedBy}}</span> </li>
-</ul>
+<div>
+  <div *ngFor="let property of locations" >
+    <property-space [location]="property"></property-space>
+  </div>
+</div>
+<!--<ul>-->
+  <!--<li *ngFor="let property of locations">({{property.locationOnBoard}}){{property.name}}-->
+    <!--<span *ngIf="property.cost">Cost: ${{property.cost}}</span>-->
+    <!--<span *ngIf="property.ownedBy">Current Rent: ${{property.rent[property.buildings]}} Owned By {{property.ownedBy}}</span>-->
+  <!--</li>-->
+<!--</ul>-->

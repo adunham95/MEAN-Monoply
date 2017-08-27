@@ -1,0 +1,15 @@
+<div class="card">
+  <h2 class="card-title" [ngStyle]="{color: location.color}">
+    {{location.name}} ({{location.locationOnBoard}})
+  </h2>
+  <h2 *ngIf="location.ownedBy">Owned By {{location.ownedBy}}</h2>
+  <div class="rent" *ngIf="location.rent[0]">
+    <h4>Current Rent: ${{location.rent[location.buildings]}}</h4>
+    <span>Rent ${{location.rent[0]}}</span>
+    <span>With One House ${{location.rent[1]}}</span>
+    <span>With Two Houses ${{location.rent[2]}}</span>
+    <span>With Three Houses ${{location.rent[3]}}</span>
+    <span>With Four Houses ${{location.rent[4]}}</span>
+    <span>With A Hotel ${{location.rent[5]}}</span>
+  </div>
+</div>
