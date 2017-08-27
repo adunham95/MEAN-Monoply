@@ -248,7 +248,7 @@ router.post('/savelocation', (req, res, next) => {
             type: 'property',
             name: "Atlantic Ave",
             group: 'Yellow',
-            color: "#F7FF5E",
+            color: "#FFD700",
             cost: 260,
             rent: [ 22, 110, 330, 800, 975, 1150 ],
             mortgage: 120,
@@ -264,7 +264,7 @@ router.post('/savelocation', (req, res, next) => {
             type: 'property',
             name: "Ventnor Ave",
             group: 'Yellow',
-            color: "#F7FF5E",
+            color: "#FFD700",
             cost: 260,
             rent: [ 22, 110, 330, 800, 975, 1150 ],
             mortgage: 120,
@@ -280,7 +280,7 @@ router.post('/savelocation', (req, res, next) => {
             type: 'property',
             name: "Marvin Gardens",
             group: 'Yellow',
-            color: "#F7FF5E",
+            color: "#FFD700",
             cost: 280,
             rent: [ 24, 120, 350, 850, 1025, 1200 ],
             mortgage: 125,
@@ -371,7 +371,28 @@ router.post('/savelocation', (req, res, next) => {
             ownedBy: null,
             locationOnBoard: 40,
             buildings: 0
-        }
+        },
+        {
+            type: 'action',
+            name: "Community Chest",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 3,
+            actions: {
+                type: 'communityChest',
+            }
+        },
+        {
+            type: 'action',
+            name: "Income Tas",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 3,
+            actions: {
+                type: 'communityChest',
+                money: -250
+            }
+        },
     ];
 
 
