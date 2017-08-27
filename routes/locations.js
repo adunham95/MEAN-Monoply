@@ -384,13 +384,176 @@ router.post('/savelocation', (req, res, next) => {
         },
         {
             type: 'action',
-            name: "Income Tas",
+            name: "Income Tax",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 3,
+            actions: {
+                type: 'incomeTax',
+                money: -250
+            }
+        },
+        {
+            type: 'railRoad',
+            name: "Reading Railroad",
+            group: 'Railroad',
+            color: "#FFFFFF",
+            cost: 200,
+            rent: [],
+            mortgage: 500,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 6,
+        },
+        {
+            type: 'railRoad',
+            name: "Pennsylvania Railroad",
+            group: 'Railroad',
+            color: "#FFFFFF",
+            cost: 200,
+            rent: [],
+            mortgage: 50,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 16,
+        },
+        {
+            type: 'railRoad',
+            name: "B & O Railroad",
+            group: 'Railroad',
+            color: "#FFFFFF",
+            cost: 200,
+            rent: [],
+            mortgage: 50,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 26,
+        },
+        {
+            type: 'railRoad',
+            name: "Short Line Railroad",
+            group: 'Railroad',
+            color: "#FFFFFF",
+            cost: 200,
+            rent: [],
+            mortgage: 50,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 26,
+        },
+        {
+            type: 'utility',
+            name: "Electric Company",
+            group: 'utility',
+            color: "#FFFFFF",
+            cost: 150,
+            rent: [],
+            mortgage: 50,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 13,
+        },
+        {
+            type: 'utility',
+            name: "Water Company",
+            group: 'utility',
+            color: "#FFFFFF",
+            cost: 150,
+            rent: [],
+            mortgage: 50,
+            owned: false,
+            ownedBy: null,
+            locationOnBoard: 13,
+        },
+        {
+            type: 'action',
+            name: "Luxury Tax",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 39,
+            actions: {
+                type: 'luxuryTax',
+                money: -250
+            }
+        },
+        {
+            type: 'action',
+            name: "Community Chest",
             group: 'None',
             color: "#FFFFFF",
             locationOnBoard: 3,
             actions: {
                 type: 'communityChest',
-                money: -250
+            }
+        },
+        {
+            type: 'action',
+            name: "Community Chest",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 34,
+            actions: {
+                type: 'communityChest',
+            }
+        },
+        {
+            type: 'action',
+            name: "Chance",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 8,
+            actions: {
+                type: 'chance',
+            }
+        },
+        {
+            type: 'action',
+            name: "Chance",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 23,
+            actions: {
+                type: 'chance',
+            }
+        },
+        {
+            type: 'action',
+            name: "Chance",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 37,
+            actions: {
+                type: 'chance',
+            }
+        },
+        {
+            type: 'action',
+            name: "Free Parking",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 21,
+            actions: {
+                type: 'chance',
+            }
+        },
+        {
+            type: 'action',
+            name: "Go to Jail",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 31,
+            actions: {
+                type: 'jail',
+            }
+        },
+        {
+            type: 'action',
+            name: "Go to Jail",
+            group: 'None',
+            color: "#FFFFFF",
+            locationOnBoard: 11,
+            actions: {
+                type: 'jail',
             }
         },
     ];
