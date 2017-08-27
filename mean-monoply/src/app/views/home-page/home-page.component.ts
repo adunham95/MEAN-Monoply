@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   userID: string;
 
   users: any;
+  activeUser: any;
   name: any;
 
   constructor(
@@ -34,6 +35,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.reloadLocations();
     this.getUser();
+
   }
 
   movePlayer(userIndex){
@@ -45,10 +47,11 @@ export class HomePageComponent implements OnInit {
     this.diceDoubles = this.doublesCheck(this.diceNumberOne, this.diceNumberTwo);
     this.diceTotal = this.diceNumberOne + this.diceNumberTwo;
 
-    let currentUser = this.users;
+    let currentUser = this.activeUser;
 
     // Sets the new location  number in the array.
     const newLocation = currentUser.location + this.diceTotal;
+
     if(newLocation >= this.locations.length){
       //If the number is larger then the array it finds the difference and moves the user to that location
       currentUser.location = newLocation - this.locations.length
@@ -95,10 +98,9 @@ export class HomePageComponent implements OnInit {
       this.message = "BANKRUPT"
     }
 
-    this.profileService.setPlayerStatus(currentUser._id, true).subscribe(data =>{
+    this.profileService.setPlayerStatus(currentUser._id, true, currentUser.location).subscribe(data =>{
       console.log(data)
     });
-    this.getUser();
   }
 
   doublesCheck(diceOne, diceTwo){
@@ -112,11 +114,11 @@ export class HomePageComponent implements OnInit {
   }
 
   purchaseProperty(user, property, propertyIndex){
-    let currentUser = user;
+    let currentUser = this.activeUser;
     let currentLoc = property;
 
     //Calls the location service to update the database
-    this.locationService.purchaseUpdate(property._id, user.name.toString()).subscribe(data => {
+    this.locationService.purchaseUpdate(property._id, currentUser.name.toString()).subscribe(data => {
       if(data.location.ok === 1){
 
 
@@ -162,7 +164,10 @@ export class HomePageComponent implements OnInit {
   getUser(){
     this.profileService.getAll().subscribe(user =>{
       console.log(user);
-      this.users = user.user
+      this.users = user.user;
+      this.activeUser = this.users.find(user  => user.active === true);
+      // this.activeUser = this.activeUser;
+      console.log(this.activeUser)
     }, err =>{
       console.log(err);
       return false
@@ -180,4 +185,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  nextTurn(){
+
+  }
 }

@@ -17,23 +17,27 @@
 
 <div *ngIf="users" >
   <div *ngFor="let user of users">
-    <h2>Current Player: {{user.name}}</h2>
-    <div *ngIf="user.ownedProperties">
+    <p>{{user.name}}  {{user.active}}</p>
+  </div>
+
+  <div>
+    <h2>Current Player: {{activeUser.name}}</h2>
+    <div *ngIf="activeUser.ownedProperties">
       <h3>Owned Properties</h3>
       <ul>
-        <li *ngFor="let owned of user.ownedProperties">
+        <li *ngFor="let owned of activeUser.ownedProperties">
           {{owned}}
           <span></span>
-          <button (click)="addHouse()">Add House</button>
+          <!--<button (click)="addHouse()">Add House</button>-->
         </li>
       </ul>
     </div>
-    <h3>Money: {{user.money}}</h3>
-    <h3 *ngIf="locations">Current Location: {{locations[user.location].name}}</h3>
+    <h3>Money: {{activeUser.money}}</h3>
+    <h3 *ngIf="locations">Current Location: {{locations[activeUser.location].name}}</h3>
     <div *ngIf="locations">
       <div *ngIf=purchaseable>
-        <h2>Would you like to purchase {{locations[user.location].name}}?</h2>
-        <button (click)="purchaseProperty(user, locations[user.location], user.location)">Yes</button>
+        <h2>Would you like to purchase {{locations[activeUser.location].name}}?</h2>
+        <button (click)="purchaseProperty(activeUser, locations[activeUser.location], activeUser.location)">Yes</button>
         <button (click)="purchaseable = false">No</button>
       </div>
     </div>

@@ -49,6 +49,6 @@ module.exports.deleteAll = function (callback) {
     User.deleteMany(query.$all, callback)
 };
 
-module.exports.setActivePlayer = function (userID, userStatus, callback) {
-    User.where({_id: userID}).update({active: userStatus}, callback);
+module.exports.setActivePlayer = function (userID, userStatus, userLocation,  callback) {
+    User.where({_id: userID}).update({active: userStatus, location: userLocation}, callback);
 };

@@ -35,10 +35,10 @@ export class ProfileService {
     return this.http.post('http://localhost:8080/users/update/purchase', {money: money, _id: userID, locationName: locationName}, {headers: headers}).map(res => res.json())
   }
 
-  setPlayerStatus(userID, status){
+  setPlayerStatus(userID, status, currentLocation){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/users/update/setActive', {status: status, userID: userID}, {headers: headers}).map(res => res.json())
+    return this.http.post('http://localhost:8080/users/update/setActive', {status: status, userID: userID, location: currentLocation}, {headers: headers}).map(res => res.json())
   }
 }
 

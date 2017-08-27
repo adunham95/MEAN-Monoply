@@ -80,8 +80,9 @@ router.post('/update/purchase', function (req, res, next) {
 router.post('/update/setActive', function (req, res, next) {
     let status = req.body.status;
     let userID = req.body.userID;
+    let location = req.body.location;
 
-    User.setActivePlayer(userID, status, (err, user) =>{
+    User.setActivePlayer(userID, status, location, (err, user) =>{
         if (err) {
             res.json({success: false, msg: "Error Updating Player " + err});
         }
