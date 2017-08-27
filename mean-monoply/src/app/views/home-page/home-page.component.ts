@@ -157,7 +157,10 @@ export class HomePageComponent implements OnInit {
   reloadLocations(){
     this.locationService.getAllLocations().subscribe(locations =>{
       console.log(locations);
-      this.locations = locations.locations
+      this.locations = locations.locations;
+      this.locations.sort(function (a, b) {
+        return a.locationOnBoard - b.locationOnBoard;
+      });
     }, err =>{
       console.log(err);
       return false
