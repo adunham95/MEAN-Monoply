@@ -3,6 +3,8 @@ import { ActionsService} from "../../services/actions.service"
 import { LocationsService} from "../../services/locations.service";
 import { ProfileService} from "../../services/profile.service"
 import {init} from "protractor/built/launcher";
+import {isNullOrUndefined, isUndefined} from "util";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 @Component({
   selector: 'app-home-page',
@@ -174,9 +176,18 @@ export class HomePageComponent implements OnInit {
     this.profileService.getAll().subscribe(user =>{
       console.log(user);
       this.users = user.user;
-      this.activeUser = this.users.find(user  => user.active === true);
-      // this.activeUser = this.activeUser;
-      console.log(this.activeUser)
+      if(this.activeUser === undefined ){
+        console.log('NO active users');
+        this.activeUser = this.users[0];
+        this.users[0].active = true;
+        this.profileService.setPlayerStatus(this.users[0]._id, true, 0).subscribe(data =>{
+          console.log(data)
+        });
+      }
+      else {
+        this.activeUser = this.users.find(user  => user.active === true);
+        console.log(this.activeUser)
+      }
     }, err =>{
       console.log(err);
       return false
@@ -187,7 +198,7 @@ export class HomePageComponent implements OnInit {
     this.profileService.createProfile(this.name).subscribe(data =>{
       console.log(data);
       localStorage.setItem('userId', data.user._id);
-      this.getUser()
+      this.getUser();
     }, err =>{
       console.log(err);
       return false
@@ -197,6 +208,7 @@ export class HomePageComponent implements OnInit {
   endTurn(){
     this.rolled = false;
     this.purchaseable = false;
+    this.message = null;
     let nextUserID =  this.users.indexOf(this.activeUser);
     nextUserID = nextUserID + 1;
     if(nextUserID >= this.users.length){

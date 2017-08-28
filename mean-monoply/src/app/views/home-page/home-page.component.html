@@ -1,17 +1,19 @@
 <button (click)="movePlayer()" *ngIf="!rolled">Roll Dice</button>
 <!--<button (click)="resetGame()">Reset Game</button>-->
 <!--<button (click)="addPlayer()">Add Player</button>-->
-<h1>Dice One: {{diceNumberOne}}</h1>
-<h1>Dice Two: {{diceNumberTwo}}</h1>
-<h1>Dice Total: {{diceTotal}}</h1>
-<h1 *ngIf="diceDoubles">DOUBLES!</h1>
+<div *ngIf="diceTotal">
+  <h1>Dice One: {{diceNumberOne}}</h1>
+  <h1>Dice Two: {{diceNumberTwo}}</h1>
+  <h1>Dice Total: {{diceTotal}}</h1>
+  <h1 *ngIf="diceDoubles">DOUBLES!</h1>
+</div>
 
 <form (submit)="newUser()">
   <div class="form-group">
     <label>Name</label>
     <input type="text" [(ngModel)]="name" name="name" class="form-control">
   </div>
-  <input type="submit" class="btn btn-primary" value="Submit">
+  <input type="submit" class="btn btn-primary" value="Add User">
 </form>
 
 
@@ -20,7 +22,7 @@
     <p>{{user.name}}  {{user.active}} at: {{locations[user.location].name}}</p>
   </div>
 
-  <div>
+  <div *ngIf="activeUser">
     <h2>Current Player: {{activeUser.name}}</h2>
     <div *ngIf="activeUser.ownedProperties">
       <h3>Owned Properties</h3>
