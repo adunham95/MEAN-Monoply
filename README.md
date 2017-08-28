@@ -6,6 +6,6 @@ To start the database server `cd C:\Program Files\MongoDB\Server\3.4\bin` and ru
 
 To start the website server `nodemon`
 
-To start the front end server `cd angular-src` then `ng serve`
+To start the front end server `cd mean-monopoly` then `ng serve`
 
 To run the mongo shell `cd C:\Program Files\MongoDB\Server\3.4\bin` and run `mongo.exe`
