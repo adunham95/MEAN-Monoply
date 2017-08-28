@@ -42,9 +42,6 @@ export class HomePageComponent implements OnInit {
   }
 
   movePlayer(userIndex){
-    this.purchaseable = false;
-    this.message = null;
-
     this.diceNumberOne = this.actionService.getDiceRoll();
     this.diceNumberTwo = this.actionService.getDiceRoll();
     this.diceDoubles = this.doublesCheck(this.diceNumberOne, this.diceNumberTwo);
@@ -97,6 +94,14 @@ export class HomePageComponent implements OnInit {
       if(userLocation.actions[0].type === 'goToJail'){
         this.message = userLocation.actions[0].message;
         currentUser.location = 8
+      }
+      if(userLocation.actions[0].type === 'chance'){
+        let chance = this.actionService.getChance();
+        this.message = chance.msg;
+      }
+      if(userLocation.actions[0].type === 'communityChest'){
+        let chance = this.actionService.getChance();
+        this.message = chance.msg;
       }
     }
 
@@ -208,7 +213,7 @@ export class HomePageComponent implements OnInit {
   endTurn(){
     this.rolled = false;
     this.purchaseable = false;
-    this.message = null;
+    this.message = '';
     let nextUserID =  this.users.indexOf(this.activeUser);
     nextUserID = nextUserID + 1;
     if(nextUserID >= this.users.length){
